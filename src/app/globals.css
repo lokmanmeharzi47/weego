@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design tokens Weego — pilotés par variables CSS pour le thème clair/sombre.
+ * Les valeurs sont en HSL (sans la fonction hsl()) pour rester compatibles avec
+ * la syntaxe `hsl(var(--token))` utilisée dans tailwind.config.ts.
+ */
+@layer base {
+  :root {
+    --background: 240 20% 99%; /* gris très clair */
+    --surface: 0 0% 100%; /* surfaces blanches */
+    --card: 0 0% 100%;
+    --foreground: 224 30% 12%;
+    --muted: 240 16% 96%;
+    --muted-foreground: 224 12% 45%;
+    --border: 240 14% 91%;
+
+    --brand: 268 100% 50%; /* #7700ff */
+    --accent: 55 100% 50%; /* #FFEA00 */
+    --orange: 27 100% 50%; /* #ff7300 */
+
+    --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif;
+  }
+
+  .dark {
+    --background: 240 16% 6%; /* noir/gris foncé profond */
+    --surface: 240 14% 9%;
+    --card: 240 14% 10%;
+    --foreground: 220 25% 96%;
+    --muted: 240 10% 16%;
+    --muted-foreground: 220 10% 65%;
+    --border: 240 10% 18%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism subtil pour le header et les cartes premium */
+  .glass {
+    background-color: hsl(var(--surface) / 0.7);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+  }
+
+  /* Barre de défilement discrète */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 9999px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
